@@ -10,8 +10,9 @@
 
 
 // --------------- Model -------------------------  
-
-
+let gamePlayedAmount = 0;
+let correctAmount = 0;
+let incorrectAmount = 0;
 let questionsAmount = 0;
 let aboutText = 'Welcome to Quizzz. This is the quizzziest quiz in the quiz world.'
 
@@ -93,15 +94,20 @@ fetch('https://opentdb.com/api.php?amount=10&type=boolean')
 }
 
 function checkIfCorrect(){
-    let gamePlayedAmount = 0;
-    let correctAmount = 0;
-    let incorrectAmount = 0;
+    
+   
     
     let checkedInputs = [];
     
     let form = document.querySelector('form');
     form.addEventListener('submit', function(e){
+         e.preventDefault();
+        
+         /* if(checkedInputs.length < 10){
+             console.log('hej')
+         } */
 
+        
         let checkAllInputs = document.querySelectorAll('.quiz__radio__input');
         
         for(let i = 0; i < checkAllInputs.length; i++){
@@ -112,14 +118,86 @@ function checkIfCorrect(){
             
     }
 
-       e.preventDefault();
+       
     };
     console.log(checkedInputs)
     console.log(quizData.correctAnswers);
-    
-    if(checkedInputs.length < 10){
+    console.log(checkedInputs.length)
+     if(checkedInputs.length < 10){
+
+        let modalContent = document.createElement('div');
+        modalContent.classList.add('modal-content');
+        selModalDialog = document.querySelector('.modal-dialog');
+        selModalDialog.appendChild(modalContent);
+        let modalHeader = document.createElement('div');
+        modalHeader.classList.add('modal-header');
+        let selModalContent = document.querySelector('.modal-content');
+        selModalContent.appendChild(modalHeader);
+        let modalTitle = document.createElement('h5');
+        modalTitle.classList.add('modal-title');
+        modalTitle.textContent = 'Resultat';
+        modalTitle.id = 'h5Title'
+        let selModalHeader = document.querySelector('.modal-header');
+        selModalHeader.appendChild(modalTitle)
+        let closeButton = document.createElement('button');
+        closeButton.setAttribute('type', 'button');
+        closeButton.classList.add('close');
+        closeButton.setAttribute('data-dismiss', 'modal');
+        closeButton.setAttribute('aria-label', 'Close');
+        modalHeader.appendChild(closeButton);
+        let selButton = document.querySelector('.close');
+        let span = document.createElement('span');
+        span.setAttribute('aria-hidden', 'true');
+        span.innerHTML = '&times;'; 
+        selButton.appendChild(span);
+        let modalBody = document.createElement('div');
+        modalBody.classList.add('modal-body');
+        modalBody.textContent = 'You have not answered all 10 questions';
+        modalContent.appendChild(modalBody);
+        let modalFooter = document.createElement('div');
+        modalFooter.classList.add('modal-footer');
+        modalContent.appendChild(modalFooter);
+        let selModalFooter = document.querySelector('.modal-footer');
+        let btnSecondary = document.createElement('button');
+        btnSecondary.setAttribute('type', 'button');
+        btnSecondary.classList.add('btn');
+        btnSecondary.classList.add('btn-secondary');
+        btnSecondary.setAttribute('data-dismiss', 'modal');
+        btnSecondary.classList.add('popup__btn')
+        btnSecondary.textContent = 'Close';
+        selModalFooter.appendChild(btnSecondary);
+        
+        btnSecondary.addEventListener('click', function(e){
+           console.log(e.target);
+            let modalDialogClear = document.querySelector('.modal-dialog');
+           console.log(modalDialogClear)
+           
+           setTimeout(() => {
+
+            modalDialogClear = document.querySelector('.modal-dialog');
+            modalDialogClear.innerHTML = '';
+               
+           }, 300);
+
             
-            let not10Message = document.createElement('h3');
+           /*  let createModalDialog = docuement.createElement('div');
+            createModalDialog.classlist.add('modal-dialog');
+            createModalDialog.setAttribute('role', 'document');
+            modalDialogClear.appendChild(createModalDialog);
+               
+           
+           console.log(modalDialogClear) */
+                
+           
+        })
+        checkedInputs = [];
+            return;
+            
+        
+        
+        
+            
+            /* let not10Message = document.createElement('h3');
             not10Message.textContent = 'Please answer all 10 questions';
             not10Message.id = 'not10Message'
             let selForm = document.querySelector('.quiz__button');
@@ -130,9 +208,10 @@ function checkIfCorrect(){
             let selDiv = document.querySelector('#quizDiv__bottom');
             selDiv.appendChild(not10Message);
             checkedInputs = [];
-            return;
+            return; */
             
-        }
+        } 
+
 
     for(let i = 0; i < checkedInputs.length; i++){
      
@@ -152,9 +231,10 @@ function checkIfCorrect(){
     // Lägg till popup-funktion
     
     
-
-
-
+    
+    
+    modalPopup();
+    
     gamePlayedAmount = 0;
     correctAmount = 0;
     incorrectAmount = 0;
@@ -195,8 +275,13 @@ document.querySelector('.closebtn').addEventListener('click', function(){
 
 // Render first button
 function renderButton(){
+
+    
+
+    
      
     document.querySelector('main').innerHTML = '';
+    /*  */
     let startButton = document.createElement('button');
     startButton.classList.add('btn');
     startButton.classList.add('btn-outline-primary');
@@ -205,8 +290,23 @@ function renderButton(){
     startButton.textContent = 'Starta Quiz';
     let main = document.querySelector('main');
     main.appendChild(startButton);
-    document.querySelector('.startQuiz__button').addEventListener('click', function(){
+
+    
+
+    document.querySelector('.startQuiz__button').addEventListener('click', function(e){
+
+            
+            
+           /*  modalFade = document.querySelector('.modal');
+            modalFade.innerHTML = ''; */
+            
+            
+    
+    
+        
+
         renderQuiz();
+        
 
     })
     
@@ -218,9 +318,16 @@ function renderButton(){
 
 // starts with Onclick in html.
 function renderStats(){
-    document.querySelector('.header__header').innerHTML = '';
+    document.querySelector('.header__change').innerHTML = '';
     document.querySelector('main').innerHTML = '';
     let closeNavigation = document.querySelector('#sidenavigation');
+    let h4Header = document.createElement('h4');
+    h4Header.textContent = 'Static';
+    h4Header.classList.add('header__text');
+    let selheaderChange = document.querySelector('.header__change');
+    selheaderChange.appendChild(h4Header); 
+
+
     closeNavigation.style.width = '0px'
     let main = document.querySelector('main')
     let divContainer = document.createElement('div')
@@ -264,12 +371,22 @@ function renderStats(){
 function renderQuiz(){
     
    document.querySelector('main').innerHTML = '';
-   document.querySelector('.header__header').innerHTML = '';
+   document.querySelector('.header__change').innerHTML = '';
+   let closeNavigation = document.querySelector('#sidenavigation');
+   closeNavigation.style.width = '0px'
+
+
+    let body = document.querySelector('body');
+        if (body.childNodes[3]){
+            body.removeChild(body.childNodes[3]);
+        }
+            
+        
    let h4Header = document.createElement('h4');
    h4Header.textContent = 'Quizzz';
    h4Header.classList.add('header__text');
-   let selheader = document.querySelector('.header__header');
-   selheader.appendChild(h4Header); 
+   let selheaderChange = document.querySelector('.header__change');
+   selheaderChange.appendChild(h4Header); 
    let form = document.createElement('form');
    let main = document.querySelector('main');
    main.appendChild(form) 
@@ -342,29 +459,11 @@ function renderQuiz(){
     button.classList.add('quiz__button')
     button.textContent = 'Correct my Quizzz';
     form.appendChild(button)
+
+    // Insert the main div for Modal popup to accomplish one click on submit
+
     
-    checkIfCorrect();
-    modalPopup();
-}
-
-function modalPopup(){
-
-
-
-  /*   <!-- Button trigger modal -->
-    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" data-backdrop="static" data-keyboard="false">
-        Launch demo modal
-      </button>
-
-modalContainer
-    //main div
-
-    let  */
-
-
-
-
-    let main = document.querySelector('body');
+    body = document.querySelector('body');  
     let modalFade = document.createElement('div');
     modalFade.classList.add('modal');
     modalFade.classList.add('fade');
@@ -373,12 +472,29 @@ modalContainer
     modalFade.setAttribute('area-labelledby', 'modalLabel');
     modalFade.setAttribute('area-hidden', 'true');
     modalFade.id = 'modalContainer'
-    main.appendChild(modalFade)
+    body.appendChild(modalFade)
     let modalDialog = document.createElement('div');
     modalDialog.classList.add('modal-dialog');
     modalDialog.setAttribute('role', 'document');
     let selmodalFade = document.querySelector('#modalContainer');
     selmodalFade.appendChild(modalDialog);
+    
+
+
+    checkIfCorrect();
+    
+    
+}
+
+function modalPopup(){
+   
+
+
+    /* let modalDialog = document.createElement('div');
+    modalDialog.classList.add('modal-dialog');
+    modalDialog.setAttribute('role', 'document');
+    let selmodalFade = document.querySelector('#modalContainer');
+    selmodalFade.appendChild(modalDialog); */
     let modalContent = document.createElement('div');
     modalContent.classList.add('modal-content');
     selModalDialog = document.querySelector('.modal-dialog');
@@ -389,7 +505,8 @@ modalContainer
     selModalContent.appendChild(modalHeader);
     let modalTitle = document.createElement('h5');
     modalTitle.classList.add('modal-title');
-    modalTitle.textContent = 'modal title';
+    modalTitle.textContent = 'Resultat';
+    modalTitle.id = 'h5Title'
     let selModalHeader = document.querySelector('.modal-header');
     selModalHeader.appendChild(modalTitle)
     let closeButton = document.createElement('button');
@@ -405,53 +522,31 @@ modalContainer
     selButton.appendChild(span);
     let modalBody = document.createElement('div');
     modalBody.classList.add('modal-body');
-    modalBody.textContent = 'Test text';
+    modalBody.textContent = 'You have got ' + correctAmount + ' correct answers';
     modalContent.appendChild(modalBody);
     let modalFooter = document.createElement('div');
     modalFooter.classList.add('modal-footer');
     modalContent.appendChild(modalFooter);
     let selModalFooter = document.querySelector('.modal-footer');
-    let btnSecondary = document.createElement('button');
-    btnSecondary.setAttribute('type', 'button');
-    btnSecondary.classList.add('btn');
-    btnSecondary.classList.add('btn-secondary');
-    btnSecondary.setAttribute('data-dismiss', 'modal');
-    btnSecondary.textContent = 'Close';
-    selModalFooter.appendChild(btnSecondary);
     let btnPrimary = document.createElement('button');
     btnPrimary.setAttribute('type', 'button');
     btnPrimary.classList.add('btn');
     btnPrimary.classList.add('btn-primary');
-    btnPrimary.textContent = 'Save changes';
+    btnPrimary.setAttribute('data-dismiss', 'modal');
+    btnPrimary.classList.add('popup__btn')
+    btnPrimary.textContent = 'Start new Quizzz';
     selModalFooter.appendChild(btnPrimary);
+    btnPrimary.addEventListener('click', function(){
 
-/* 
+            let body = document.querySelector('body');
+            console.log(body.childNodes)
+            body.removeChild(body.childNodes[3]);
+        renderFirstPage();
+    })
 
-   
 
-
-    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-      <div class="modal-header">
-       <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-             </div>
-            <div class="modal-body">
-            Test text
-          </div> 
-         
-         
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-primary">Save changes</button>
-          </div>
-        </div>
-      </div>
-    </div> */
 }
+
 
 
 
@@ -459,8 +554,9 @@ modalContainer
 function renderAbout(){
 
     document.querySelector('main').innerHTML = '';
-    let header = document.querySelector('.header__header')
+    let header = document.querySelector('.header__change')
     header.innerHTML = '';
+    let h4Header = document.createElement('h4');
     let h4 = document.createElement('h4');
     h4.classList.add('header__text');
     h4.textContent = 'About';
@@ -475,12 +571,14 @@ function renderAbout(){
     
 }
 
-function quizPage(){
-    let closeNavigation = document.querySelector('#sidenavigation');
-    closeNavigation.style.width = '0px';
-    renderQuiz();
 
+
+
+function reload(){
+    
+    location.reload();
 }
+
 
 function renderFirstPage(){
 

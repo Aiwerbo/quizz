@@ -21,11 +21,22 @@ header{
 
 
 .header__header{
-    position: static;
-    position: absolute;
-    padding: 20px 70px;
+    display: block;
+    width: 100%;
+    float: left;
+    padding: 0px 0px;
 }
-.header__text{
+.header__span{
+    position: absolute;
+    top: 10px;
+    left: 20px;
+    width: 100px;
+}
+.header__change{
+    position: absolute;
+    left: 80px;
+    top: 20px;
+    float: left;
 
 }
 .quiz__container{
@@ -35,7 +46,7 @@ header{
 }
 
 .sideNav__open{
-    position: absolute;
+    
     left: 20px;
     top: 10px;
     color: #9a9a9a;
@@ -44,6 +55,7 @@ header{
 
 
 .sidenav {
+    
     height: 100%;
     width: 0;
     position: fixed;
