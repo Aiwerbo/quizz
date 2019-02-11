@@ -14,6 +14,7 @@ let gamePlayedAmount = 0;
 let correctAmount = 0;
 let incorrectAmount = 0;
 let questionsAmount = 0;
+let checkedInputs = [];
 let aboutText = 'Welcome to Quizzz. This is the quizzziest quiz in the quiz world.'
 
 let quizData = {
@@ -43,7 +44,7 @@ let quizData = {
         this.stats.statGamePlayed = this.stats.statGamePlayed + gamePlayed;
         this.stats.statCorrectAnswers = this.stats.statCorrectAnswers + correct;
         this.stats.statIncorrectAnswers = this.stats.statIncorrectAnswers + incorrect;
-        this.stats.statCorrectPercentage = ((this.stats.statCorrectAnswers / amountQuestions) * 100) + ' %' ;
+        this.stats.statCorrectPercentage = Math.round(((this.stats.statCorrectAnswers / amountQuestions) * 100)) + ' %' ;
 
         console.log(this.stats.statCorrectAnswers)
         console.log(this.stats.statIncorrectAnswers)
@@ -97,7 +98,7 @@ function checkIfCorrect(){
     
    
     
-    let checkedInputs = [];
+    checkedInputs = [];
     
     let form = document.querySelector('form');
     form.addEventListener('submit', function(e){
@@ -166,6 +167,16 @@ function checkIfCorrect(){
         btnSecondary.classList.add('popup__btn')
         btnSecondary.textContent = 'Close';
         selModalFooter.appendChild(btnSecondary);
+
+        closeButton = document.querySelector('.close');
+        closeButton.addEventListener('click', function(){
+            setTimeout(() => {
+    
+                let modalDialogClear = document.querySelector('.modal-dialog');
+                modalDialogClear.innerHTML = '';
+                checkedInputs = [];
+               }, 300);
+        }) 
         
         btnSecondary.addEventListener('click', function(e){
            console.log(e.target);
@@ -179,36 +190,10 @@ function checkIfCorrect(){
                
            }, 300);
 
-            
-           /*  let createModalDialog = docuement.createElement('div');
-            createModalDialog.classlist.add('modal-dialog');
-            createModalDialog.setAttribute('role', 'document');
-            modalDialogClear.appendChild(createModalDialog);
-               
-           
-           console.log(modalDialogClear) */
-                
-           
-        })
-        checkedInputs = [];
+        });
+            checkedInputs = [];
             return;
             
-        
-        
-        
-            
-            /* let not10Message = document.createElement('h3');
-            not10Message.textContent = 'Please answer all 10 questions';
-            not10Message.id = 'not10Message'
-            let selForm = document.querySelector('.quiz__button');
-            let div = document.createElement('div');
-            div.id = 'quizDiv__bottom';
-            selForm.before(div);
-            document.querySelector('#quizDiv__bottom').innerHTML = '';
-            let selDiv = document.querySelector('#quizDiv__bottom');
-            selDiv.appendChild(not10Message);
-            checkedInputs = [];
-            return; */
             
         } 
 
@@ -227,31 +212,16 @@ function checkIfCorrect(){
     questionsAmount = questionsAmount + 10;
     quizData.addStats(gamePlayedAmount, correctAmount, incorrectAmount, questionsAmount);
     
-
-    // Lägg till popup-funktion
-    
-    
-    
-    
     modalPopup();
     
     gamePlayedAmount = 0;
     correctAmount = 0;
     incorrectAmount = 0;
     
-    //fetchQuizData();
-    //renderButton();
+
 
 })
 }
-
-
-// funktion som tar han dom statistiken från quizData-objektet.
-
-
-
-
-// https://opentdb.com/api.php?amount=10&category=21&difficulty=easy&type=boolean
 
 
 //---------------- View --------------------------
@@ -260,11 +230,9 @@ function checkIfCorrect(){
 
 document.querySelector('.sideNav__open').addEventListener('click', function(){
     let openNavigation = document.querySelector('#sidenavigation');
-    openNavigation.style.width = '350px'
+    openNavigation.style.width = '250px'
 })
 
-
-  
 // Close navigation
 
 document.querySelector('.closebtn').addEventListener('click', function(){
@@ -321,11 +289,11 @@ function renderStats(){
     document.querySelector('.header__change').innerHTML = '';
     document.querySelector('main').innerHTML = '';
     let closeNavigation = document.querySelector('#sidenavigation');
-    let h4Header = document.createElement('h4');
-    h4Header.textContent = 'Static';
-    h4Header.classList.add('header__text');
+    let h3Header = document.createElement('h3');
+    h3Header.textContent = 'Static';
+    h3Header.classList.add('header__text');
     let selheaderChange = document.querySelector('.header__change');
-    selheaderChange.appendChild(h4Header); 
+    selheaderChange.appendChild(h3Header); 
 
 
     closeNavigation.style.width = '0px'
@@ -333,31 +301,31 @@ function renderStats(){
     let divContainer = document.createElement('div')
     divContainer.classList.add('static__container');
     selDiv = document.querySelector('.stat__container');
-    let h4played = document.createElement('h4');
-    h4played.textContent = 'Game Played';
+    let h3played = document.createElement('h3');
+    h3played.textContent = 'Game Played';
     main.appendChild(divContainer);
-    divContainer.appendChild(h4played);
+    divContainer.appendChild(h3played);
     let pTagGamePlayed = document.createElement('p');
     pTagGamePlayed.classList.add('stat__values')
     pTagGamePlayed.textContent = quizData.stats.statGamePlayed;
     divContainer.appendChild(pTagGamePlayed);
-    let h4CorrectAnswers = document.createElement('h4');
-    h4CorrectAnswers.textContent = 'Correct answers';
-    divContainer.appendChild(h4CorrectAnswers);
+    let h3CorrectAnswers = document.createElement('h3');
+    h3CorrectAnswers.textContent = 'Correct answers';
+    divContainer.appendChild(h3CorrectAnswers);
     let pTagCorrectAnswers = document.createElement('p');
     pTagCorrectAnswers.classList.add('stat__values')
     pTagCorrectAnswers.textContent = quizData.stats.statCorrectAnswers;
     divContainer.appendChild(pTagCorrectAnswers);
-    let h4IncorrectAnswers = document.createElement('h4');
-    h4IncorrectAnswers.textContent = 'Incorrect answers';
-    divContainer.appendChild(h4IncorrectAnswers);
+    let h3IncorrectAnswers = document.createElement('h3');
+    h3IncorrectAnswers.textContent = 'Incorrect answers';
+    divContainer.appendChild(h3IncorrectAnswers);
     let pTagIncorrectAnswers = document.createElement('p');
     pTagIncorrectAnswers.textContent = quizData.stats.statIncorrectAnswers;
     pTagIncorrectAnswers.classList.add('stat__values');
     divContainer.appendChild(pTagIncorrectAnswers)
-    let h4CorrectPersentage = document.createElement('h4');
-    h4CorrectPersentage.textContent = 'Correct Percentage';
-    divContainer.appendChild(h4CorrectPersentage);
+    let h3CorrectPersentage = document.createElement('h3');
+    h3CorrectPersentage.textContent = 'Correct Percentage';
+    divContainer.appendChild(h3CorrectPersentage);
     let pTagCorrectPercentage = document.createElement('p');
     pTagCorrectPercentage.classList.add('stat__values');
     pTagCorrectPercentage.textContent = quizData.stats.statCorrectPercentage;
@@ -382,11 +350,11 @@ function renderQuiz(){
         }
             
         
-   let h4Header = document.createElement('h4');
-   h4Header.textContent = 'Quizzz';
-   h4Header.classList.add('header__text');
+   let h3Header = document.createElement('h3');
+   h3Header.textContent = 'Quizzz';
+   h3Header.classList.add('header__text');
    let selheaderChange = document.querySelector('.header__change');
-   selheaderChange.appendChild(h4Header); 
+   selheaderChange.appendChild(h3Header); 
    let form = document.createElement('form');
    let main = document.querySelector('main');
    main.appendChild(form) 
@@ -409,29 +377,33 @@ function renderQuiz(){
         form.appendChild(divContainer);
         let quizP = document.createElement('p');
         quizP.classList.add('quiz__numbers__question');
-        quizP.textContent = quizNumbers + ' ' + quizQuestions;
+        quizP.innerHTML = quizNumbers + ' ' + quizQuestions;
         divContainer.appendChild(quizP)
         let br = document.createElement('br');
         let label1 = document.createElement('label');
         label1.setAttribute('name', quizNumbers);
-        
         label1.classList.add('quiz__radio__upp');
+        label1.classList.add('mds-radio');
         label1.textContent = 'True';
         divContainer.appendChild(label1);
         divContainer.appendChild(br);
         let label2 = document.createElement('label');
         label2.classList.add('quiz__radio__down');
+        label2.classList.add('mds-radio');
         label2.textContent = 'False'
         divContainer.appendChild(label2)
         let selLabel1 = document.querySelectorAll('.quiz__radio__upp');
-        let selLabel2 = document.querySelectorAll('.quiz__radio__down')
+        let selLabel2 = document.querySelectorAll('.quiz__radio__down');
+        
         let input1 = document.createElement('input');
         let input2 = document.createElement('input');
         label2.setAttribute('name', quizNumbers);
         input1.type = 'radio';
         input2.type = 'radio';
         input1.classList.add('quiz__radio__input__upp');
-        input2.classList.add('quiz__radio__input__down')
+        input2.classList.add('quiz__radio__input__down');
+        input1.classList.add('mds-radio__input');
+        input2.classList.add('mds-radio__input');
         input1.classList.add('quiz__radio__input');
         input2.classList.add('quiz__radio__input')
         //input1.setAttribute('onclick', 'checkIfChecked()');
@@ -446,8 +418,26 @@ function renderQuiz(){
         input2.textContent = 'False';
         selLabel1[i].appendChild(input1);
         selLabel2[i].appendChild(input2);
-
+        let radioSpan1 = document.createElement('span');
+        let radioSpan2 = document.createElement('span');
+        radioSpan1.classList.add('mds-radio__span');
+        radioSpan2.classList.add('mds-radio__innerSpan');
+        let radioSpan3 = document.createElement('span');
+        let radioSpan4 = document.createElement('span');
+        radioSpan3.classList.add('mds-radio__span');
+        radioSpan4.classList.add('mds-radio__innerSpan');
+        selLabel1[i].appendChild(radioSpan1);
+        selLabel1[i].appendChild(radioSpan2);
+        selLabel2[i].appendChild(radioSpan3);
+        selLabel2[i].appendChild(radioSpan4);
+        
+        
     }
+        
+
+        
+    
+
     let button = document.createElement('button');
     button.type = 'submit';
     button.setAttribute('data-toggle', 'modal');
@@ -479,8 +469,6 @@ function renderQuiz(){
     let selmodalFade = document.querySelector('#modalContainer');
     selmodalFade.appendChild(modalDialog);
     
-
-
     checkIfCorrect();
     
     
@@ -536,13 +524,41 @@ function modalPopup(){
     btnPrimary.classList.add('popup__btn')
     btnPrimary.textContent = 'Start new Quizzz';
     selModalFooter.appendChild(btnPrimary);
+    let btnSecondary = document.createElement('button');
+    btnSecondary.setAttribute('type', 'button');
+    btnSecondary.classList.add('btn');
+    btnSecondary.classList.add('btn-secondary');
+    btnSecondary.setAttribute('data-dismiss', 'modal');
+    btnSecondary.classList.add('popup__btn')
+    btnSecondary.textContent = 'Close';
+    selModalFooter.appendChild(btnSecondary);
+
     btnPrimary.addEventListener('click', function(){
 
             let body = document.querySelector('body');
             console.log(body.childNodes)
             body.removeChild(body.childNodes[3]);
-        renderFirstPage();
+            fetchQuizData();
+
+        
     })
+    closeButton.addEventListener('click', function(){
+        setTimeout(() => {
+
+            let modalDialogClear = document.querySelector('.modal-dialog');
+            modalDialogClear.innerHTML = '';
+            checkedInputs = [];
+           }, 300);
+    })
+    btnSecondary.addEventListener('click', function(){
+        setTimeout(() => {
+
+            let modalDialogClear = document.querySelector('.modal-dialog');
+            modalDialogClear.innerHTML = '';
+            checkedInputs = [];
+           }, 300);
+    })
+    
 
 
 }
@@ -556,11 +572,11 @@ function renderAbout(){
     document.querySelector('main').innerHTML = '';
     let header = document.querySelector('.header__change')
     header.innerHTML = '';
-    let h4Header = document.createElement('h4');
-    let h4 = document.createElement('h4');
-    h4.classList.add('header__text');
-    h4.textContent = 'About';
-    header.appendChild(h4);
+    let h3Header = document.createElement('h3');
+    let h3 = document.createElement('h3');
+    h3.classList.add('header__text');
+    h3.textContent = 'About';
+    header.appendChild(h3);
     let closeNavigation = document.querySelector('#sidenavigation');
     closeNavigation.style.width = '0px'
     let main = document.querySelector('main');
