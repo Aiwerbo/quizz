@@ -1,14 +1,4 @@
 
-//
-
-// Ladda datan direkt till objektet innan man tryckt på starta. Om datan inte går att hämta byt ut knappen mot en annan, typ. Data gick inte att hämta, hämta igen?
-
-
-
-
-
-
-
 // --------------- Model -------------------------  
 let gamePlayedAmount = 0;
 let correctAmount = 0;
@@ -50,16 +40,9 @@ let quizData = {
         console.log(this.stats.statIncorrectAnswers)
         console.log(this.stats.statCorrectPercentage)
 
-        
-    
     }
     
 }
-
-
-
-
-
 // --------------- Controller --------------------
 
 function fetchQuizData(){
@@ -96,8 +79,6 @@ fetch('https://opentdb.com/api.php?amount=10&type=boolean')
 
 function checkIfCorrect(){
     
-   
-    
     checkedInputs = [];
     
     let form = document.querySelector('form');
@@ -118,7 +99,6 @@ function checkIfCorrect(){
             checkedInputs.push(checkAllInputs[i].value);
             
     }
-
        
     };
     console.log(checkedInputs)
@@ -193,18 +173,13 @@ function checkIfCorrect(){
         });
             checkedInputs = [];
             return;
-            
-            
         } 
-
 
     for(let i = 0; i < checkedInputs.length; i++){
      
         if(checkedInputs[i] === quizData.correctAnswers[i]){
             correctAmount++;
         }
-        
-        
     }
     gamePlayedAmount++;
     incorrectAmount = 10 - correctAmount;
@@ -218,36 +193,32 @@ function checkIfCorrect(){
     correctAmount = 0;
     incorrectAmount = 0;
     
-
-
 })
 }
-
-
 //---------------- View --------------------------
-
-// Open navigation
 
 document.querySelector('.sideNav__open').addEventListener('click', function(){
     let openNavigation = document.querySelector('#sidenavigation');
     openNavigation.style.width = '250px'
+    let h3toMove = document.querySelector('.header__text');
+    h3toMove.classList.add('header__text--moveRight');
+    h3toMove.classList.remove('header__text--moveLeft');
+    
 })
 
 // Close navigation
 
 document.querySelector('.closebtn').addEventListener('click', function(){
     let closeNavigation = document.querySelector('#sidenavigation');
-    closeNavigation.style.width = '0px'
+    closeNavigation.style.width = '0px';
+    let h3toMove = document.querySelector('.header__text');
+    h3toMove.classList.add('header__text--moveLeft');
+    h3toMove.classList.remove('header__text--moveRight');
 })
-
 
 // Render first button
 function renderButton(){
 
-    
-
-    
-     
     document.querySelector('main').innerHTML = '';
     /*  */
     let startButton = document.createElement('button');
@@ -255,34 +226,23 @@ function renderButton(){
     startButton.classList.add('btn-outline-primary');
     startButton.classList.add('btn-lg');
     startButton.classList.add('startQuiz__button');
-    startButton.textContent = 'Starta Quiz';
+    startButton.textContent = 'Start Quizzz';
     let main = document.querySelector('main');
     main.appendChild(startButton);
-
-    
-
+    let header__change = document.querySelector('.header__change');
+    header__change.textContent = '';
+    let h3Header = document.createElement('h3');
+    h3Header.textContent = 'Welcome to Quizzz';
+    h3Header.classList.add('header__text');
+    let selheaderChange = document.querySelector('.header__change');
+    selheaderChange.appendChild(h3Header); 
     document.querySelector('.startQuiz__button').addEventListener('click', function(e){
-
-            
-            
-           /*  modalFade = document.querySelector('.modal');
-            modalFade.innerHTML = ''; */
-            
-            
-    
-    
         
-
         renderQuiz();
-        
-
+     
     })
     
-
 }
-
-// Render Stats - Funktion som renderar statistiken.
-
 
 // starts with Onclick in html.
 function renderStats(){
@@ -292,10 +252,10 @@ function renderStats(){
     let h3Header = document.createElement('h3');
     h3Header.textContent = 'Static';
     h3Header.classList.add('header__text');
+    h3Header.classList.add('header__text--moveLeft');
+    h3Header.classList.remove('header__text--moveRight')
     let selheaderChange = document.querySelector('.header__change');
     selheaderChange.appendChild(h3Header); 
-
-
     closeNavigation.style.width = '0px'
     let main = document.querySelector('main')
     let divContainer = document.createElement('div')
@@ -330,45 +290,43 @@ function renderStats(){
     pTagCorrectPercentage.classList.add('stat__values');
     pTagCorrectPercentage.textContent = quizData.stats.statCorrectPercentage;
     divContainer.appendChild(pTagCorrectPercentage);
-    
-    
 
 }
 
+function htmlDecode(input){
+  let textTohtml = new DOMParser().parseFromString(input, "text/html");
+  return textTohtml.documentElement.textContent;
+}
 
 function renderQuiz(){
-    
+    let h3Header = document.createElement('h3');
+    console.log(h3Header)
    document.querySelector('main').innerHTML = '';
    document.querySelector('.header__change').innerHTML = '';
    let closeNavigation = document.querySelector('#sidenavigation');
-   closeNavigation.style.width = '0px'
-
+   closeNavigation.style.width = '0px';
 
     let body = document.querySelector('body');
         if (body.childNodes[3]){
             body.removeChild(body.childNodes[3]);
         }
-            
-        
-   let h3Header = document.createElement('h3');
+               
+   h3Header.classList.remove('header__text--moveRight')
    h3Header.textContent = 'Quizzz';
    h3Header.classList.add('header__text');
+   //h3Header.classList.add('header__text--moveLeft');
    let selheaderChange = document.querySelector('.header__change');
    selheaderChange.appendChild(h3Header); 
    let form = document.createElement('form');
    let main = document.querySelector('main');
    main.appendChild(form) 
     
-
-
     for(let i = 0; i < quizData.questionNumberU.length; i++){
         let quizNumbers = quizData.questionNumber[i];
         let quizNumbersU = quizData.questionNumberU[i];
         let quizNumbersD = quizData.questionNumberD[i];
         let quizQuestions = quizData.questions[i];
         let quizCorrect = quizData.correctAnswers[i];
-
-
         let divContainer = document.createElement('div');
         divContainer.id = quizNumbers;
         divContainer.classList.add('quiz__container');
@@ -377,7 +335,7 @@ function renderQuiz(){
         form.appendChild(divContainer);
         let quizP = document.createElement('p');
         quizP.classList.add('quiz__numbers__question');
-        quizP.innerHTML = quizNumbers + ' ' + quizQuestions;
+        quizP.textContent = quizNumbers + ' ' + htmlDecode(quizQuestions);
         divContainer.appendChild(quizP)
         let br = document.createElement('br');
         let label1 = document.createElement('label');
@@ -394,7 +352,6 @@ function renderQuiz(){
         divContainer.appendChild(label2)
         let selLabel1 = document.querySelectorAll('.quiz__radio__upp');
         let selLabel2 = document.querySelectorAll('.quiz__radio__down');
-        
         let input1 = document.createElement('input');
         let input2 = document.createElement('input');
         label2.setAttribute('name', quizNumbers);
@@ -406,8 +363,6 @@ function renderQuiz(){
         input2.classList.add('mds-radio__input');
         input1.classList.add('quiz__radio__input');
         input2.classList.add('quiz__radio__input')
-        //input1.setAttribute('onclick', 'checkIfChecked()');
-        //input1.setAttribute('onclick', 'checkIfChecked()');
         input1.id = quizNumbersU;
         input2.id = quizNumbersD;
         input1.name = quizNumbers;
@@ -431,13 +386,8 @@ function renderQuiz(){
         selLabel2[i].appendChild(radioSpan3);
         selLabel2[i].appendChild(radioSpan4);
         
-        
     }
         
-
-        
-    
-
     let button = document.createElement('button');
     button.type = 'submit';
     button.setAttribute('data-toggle', 'modal');
@@ -449,10 +399,6 @@ function renderQuiz(){
     button.classList.add('quiz__button')
     button.textContent = 'Correct my Quizzz';
     form.appendChild(button)
-
-    // Insert the main div for Modal popup to accomplish one click on submit
-
-    
     body = document.querySelector('body');  
     let modalFade = document.createElement('div');
     modalFade.classList.add('modal');
@@ -471,18 +417,18 @@ function renderQuiz(){
     
     checkIfCorrect();
     
+}
+
+function renderQuizMenu(){
+    renderQuiz();
+    let h3Header = document.querySelector('.header__text')
+    h3Header.classList.add('header__text--moveLeft');
+    h3Header.classList.remove('header__text--moveRight')
     
 }
 
 function modalPopup(){
-   
 
-
-    /* let modalDialog = document.createElement('div');
-    modalDialog.classList.add('modal-dialog');
-    modalDialog.setAttribute('role', 'document');
-    let selmodalFade = document.querySelector('#modalContainer');
-    selmodalFade.appendChild(modalDialog); */
     let modalContent = document.createElement('div');
     modalContent.classList.add('modal-content');
     selModalDialog = document.querySelector('.modal-dialog');
@@ -540,7 +486,6 @@ function modalPopup(){
             body.removeChild(body.childNodes[3]);
             fetchQuizData();
 
-        
     })
     closeButton.addEventListener('click', function(){
         setTimeout(() => {
@@ -559,12 +504,7 @@ function modalPopup(){
            }, 300);
     })
     
-
-
 }
-
-
-
 
 // Starts with Onclick in html.
 function renderAbout(){
@@ -572,9 +512,10 @@ function renderAbout(){
     document.querySelector('main').innerHTML = '';
     let header = document.querySelector('.header__change')
     header.innerHTML = '';
-    let h3Header = document.createElement('h3');
     let h3 = document.createElement('h3');
     h3.classList.add('header__text');
+    h3.classList.add('header__text--moveLeft');
+    h3.classList.remove('header__text--moveRight')
     h3.textContent = 'About';
     header.appendChild(h3);
     let closeNavigation = document.querySelector('#sidenavigation');
@@ -587,20 +528,9 @@ function renderAbout(){
     
 }
 
-
-
-
-function reload(){
-    
-    location.reload();
-}
-
-
 function renderFirstPage(){
 
-
     renderButton();
-    
     
 }
 
@@ -620,10 +550,6 @@ function wrongStartButton(){
         window.location.reload();
     })
 
-
 }
 
-
 fetchQuizData();
-
-

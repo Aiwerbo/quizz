@@ -42,7 +42,29 @@ header{
 
 }
 .header__text{
+    position: absolute;
     color: white;
+    width: 250px;
+  
+}
+.header__text--moveRight{
+    animation: movingRight 0.5s;
+    animation-fill-mode: forwards;
+    animation-delay: 0.02s;  
+}
+
+@keyframes movingRight {
+    from {left: 0px;}
+    to {left: 190px;}
+}
+.header__text--moveLeft{
+    animation: movingLeft 0.5s;
+    animation-fill-mode: forwards; 
+}
+
+@keyframes movingLeft {
+    from {left: 190px;}
+    to {left: 0px;}
 }
 .quiz__container{
     margin-top: 30px;
