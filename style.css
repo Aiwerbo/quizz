@@ -48,6 +48,24 @@ header{
 h3{
     font-size: 4rem;
 }
+.modal-title{
+    font-size: 72px;
+}
+.modal-body{
+    font-size: 48px;
+}
+
+.modal-xlg{
+    width: 900px;
+    left: -200px;
+}
+.modal-content{
+    width: 900px;
+}
+
+.btn{
+    font-size: 60px;
+}
 .aboutText{
     font-size: 3rem;
 }

@@ -116,7 +116,7 @@ function checkIfCorrect(){
         selModalContent.appendChild(modalHeader);
         let modalTitle = document.createElement('h5');
         modalTitle.classList.add('modal-title');
-        modalTitle.textContent = 'Resultat';
+        modalTitle.textContent = 'Result';
         modalTitle.id = 'h5Title'
         let selModalHeader = document.querySelector('.modal-header');
         selModalHeader.appendChild(modalTitle)
@@ -225,6 +225,7 @@ function renderButton(){
     startButton.classList.add('btn');
     startButton.classList.add('btn-outline-primary');
     startButton.classList.add('btn-lg');
+    startButton.classList.add('btn-block')
     startButton.classList.add('startQuiz__button');
     startButton.textContent = 'Start Quizzz';
     let main = document.querySelector('main');
@@ -397,6 +398,7 @@ function renderQuiz(){
     button.classList.add('btn');
     button.classList.add('btn-primary');
     button.classList.add('quiz__button')
+    button.classList.add('btn-block')
     button.textContent = 'Correct my Quizzz';
     form.appendChild(button)
     body = document.querySelector('body');  
@@ -411,6 +413,7 @@ function renderQuiz(){
     body.appendChild(modalFade)
     let modalDialog = document.createElement('div');
     modalDialog.classList.add('modal-dialog');
+    modalDialog.classList.add('modal-xlg');
     modalDialog.setAttribute('role', 'document');
     let selmodalFade = document.querySelector('#modalContainer');
     selmodalFade.appendChild(modalDialog);
@@ -439,7 +442,7 @@ function modalPopup(){
     selModalContent.appendChild(modalHeader);
     let modalTitle = document.createElement('h5');
     modalTitle.classList.add('modal-title');
-    modalTitle.textContent = 'Resultat';
+    modalTitle.textContent = 'Result';
     modalTitle.id = 'h5Title'
     let selModalHeader = document.querySelector('.modal-header');
     selModalHeader.appendChild(modalTitle)
@@ -466,8 +469,10 @@ function modalPopup(){
     btnPrimary.setAttribute('type', 'button');
     btnPrimary.classList.add('btn');
     btnPrimary.classList.add('btn-primary');
+    
     btnPrimary.setAttribute('data-dismiss', 'modal');
     btnPrimary.classList.add('popup__btn')
+    btnPrimary.classList.add('btn-block')
     btnPrimary.textContent = 'Start new Quizzz';
     selModalFooter.appendChild(btnPrimary);
     let btnSecondary = document.createElement('button');
@@ -542,6 +547,7 @@ function wrongStartButton(){
     button.classList.add('btn-outline-danger');
     button.classList.add('btn-lg');
     button.classList.add('wrongStart__button');
+    button.classList.add('btn-block');
     button.textContent = 'Something went wrong, reload?';
     let main = document.querySelector('main');
     main.appendChild(button);
