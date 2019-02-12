@@ -6,6 +6,7 @@
     width: 101%;
     height: 100%;
     clear: both;
+    overflow: auto;
     
 }
 header{
@@ -100,7 +101,7 @@ h3{
     to {left: 0px;}
 }
 .quiz__container{
-    margin-top: 90px;
+   margin-top: 90px;
     margin-left: 50px;
     margin-right: 50px;
 }
