@@ -232,7 +232,7 @@ function renderButton(){
     let header__change = document.querySelector('.header__change');
     header__change.textContent = '';
     let h3Header = document.createElement('h3');
-    h3Header.textContent = 'Welcome to Quizzz';
+    h3Header.textContent = 'Welcome';
     h3Header.classList.add('header__text');
     let selheaderChange = document.querySelector('.header__change');
     selheaderChange.appendChild(h3Header); 
