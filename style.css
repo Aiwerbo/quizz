@@ -103,11 +103,14 @@ h3{
 .sideNav__open{
     background-color: #007bff;
     border: 0;
-    
+    text-decoration: none;
     color: white;
     font-size: 126px;
     cursor:pointer;
     
+}
+.sideNav__open:active, .sideNav__open:hover{
+    text-decoration: none;
 }
 .sideNav__open:focus{
      outline: 0;
