@@ -78,7 +78,7 @@ header{
 .sideNav__open{
     background-color: #007bff;
     border: 0;
-    left: 60px;
+    left: 0px;
     top: 0px;
     color: white;
     font-size: 3rem;
