@@ -190,6 +190,11 @@ h3{
       
   }
 
+  .close > span{
+    font-size: 72px;    
+  }
+ 
+
   #not10Message{
       text-align: center;
   }

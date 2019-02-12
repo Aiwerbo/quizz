@@ -254,6 +254,7 @@ function renderStats(){
     h3Header.textContent = 'Static';
     h3Header.classList.add('header__text');
     h3Header.classList.add('header__text--moveLeft');
+    h3Header.setAttribute('tabindex', '0');
     h3Header.classList.remove('header__text--moveRight')
     let selheaderChange = document.querySelector('.header__change');
     selheaderChange.appendChild(h3Header); 
@@ -264,31 +265,39 @@ function renderStats(){
     selDiv = document.querySelector('.stat__container');
     let h3played = document.createElement('h3');
     h3played.textContent = 'Game Played';
+    h3played.setAttribute('tabindex', '0');
     main.appendChild(divContainer);
     divContainer.appendChild(h3played);
     let pTagGamePlayed = document.createElement('p');
-    pTagGamePlayed.classList.add('stat__values')
+    pTagGamePlayed.classList.add('stat__values');
+    pTagGamePlayed.setAttribute('tabindex', '0');
     pTagGamePlayed.textContent = quizData.stats.statGamePlayed;
     divContainer.appendChild(pTagGamePlayed);
     let h3CorrectAnswers = document.createElement('h3');
     h3CorrectAnswers.textContent = 'Correct answers';
+    h3CorrectAnswers.setAttribute('tabindex', '0');
     divContainer.appendChild(h3CorrectAnswers);
     let pTagCorrectAnswers = document.createElement('p');
-    pTagCorrectAnswers.classList.add('stat__values')
+    pTagCorrectAnswers.classList.add('stat__values');
+    pTagCorrectAnswers.setAttribute('tabindex', '0');
     pTagCorrectAnswers.textContent = quizData.stats.statCorrectAnswers;
     divContainer.appendChild(pTagCorrectAnswers);
     let h3IncorrectAnswers = document.createElement('h3');
     h3IncorrectAnswers.textContent = 'Incorrect answers';
+    h3IncorrectAnswers.setAttribute('tabindex', '0');
     divContainer.appendChild(h3IncorrectAnswers);
     let pTagIncorrectAnswers = document.createElement('p');
     pTagIncorrectAnswers.textContent = quizData.stats.statIncorrectAnswers;
     pTagIncorrectAnswers.classList.add('stat__values');
+    pTagIncorrectAnswers.setAttribute('tabindex', '0');
     divContainer.appendChild(pTagIncorrectAnswers)
     let h3CorrectPersentage = document.createElement('h3');
+    h3CorrectPersentage.setAttribute('tabindex', '0');
     h3CorrectPersentage.textContent = 'Correct Percentage';
     divContainer.appendChild(h3CorrectPersentage);
     let pTagCorrectPercentage = document.createElement('p');
     pTagCorrectPercentage.classList.add('stat__values');
+    pTagCorrectPercentage.setAttribute('tabindex', '0');
     pTagCorrectPercentage.textContent = quizData.stats.statCorrectPercentage;
     divContainer.appendChild(pTagCorrectPercentage);
 
@@ -336,6 +345,7 @@ function renderQuiz(){
         form.appendChild(divContainer);
         let quizP = document.createElement('p');
         quizP.classList.add('quiz__numbers__question');
+        quizP.setAttribute('tabindex', '0');
         quizP.textContent = quizNumbers + ' ' + htmlDecode(quizQuestions);
         divContainer.appendChild(quizP)
         let br = document.createElement('br');
@@ -529,6 +539,7 @@ function renderAbout(){
     let pTag = document.createElement('p');
     pTag.textContent = aboutText;
     pTag.classList.add('aboutText')
+    pTag.setAttribute('tabindex', '0');
     main.appendChild(pTag)
     
 }
