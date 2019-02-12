@@ -10,7 +10,7 @@ header{
     top: 0px;
     background-color: #007bff;
     width: 100%;
-    height: 100px;
+    height: 300px;
     z-index: 1;
 
 }
@@ -25,25 +25,27 @@ header{
 }
 .header__span{
     position: absolute;
-    top: 15px;
-    left: 20px;
-    width: 100px;
+    top: 45px;
+    left: 60px;
+    width: 300px;
 }
 .header__change{
     position: absolute;
-    left: 80px;
-    top: 32px;
+    left: 240px;
+    top: 96px;
     float: left;
 
 }
 .header__text{
     position: absolute;
     color: white;
-    width: 250px;
+    width: 750px;
+    font-size: 4rem;
+    top: 10px;
   
 }
 .quiz__numbers__question{
-    font-size: 3.5rem;
+    font-size: 4rem;
 }
 .quiz__radio__upp, .quiz__radio__down{
     font-size: 4rem;
@@ -56,7 +58,7 @@ header{
 
 @keyframes movingRight {
     from {left: 0px;}
-    to {left: 190px;}
+    to {left: 500px;}
 }
 .header__text--moveLeft{
     animation: movingLeft 0.5s;
@@ -64,21 +66,22 @@ header{
 }
 
 @keyframes movingLeft {
-    from {left: 190px;}
+    from {left: 500px;}
     to {left: 0px;}
 }
 .quiz__container{
-    margin-top: 30px;
-    margin-left: 50px;
-    margin-right: 30px;
+    margin-top: 90px;
+    margin-left: 150px;
+    margin-right: 90px;
 }
 
 .sideNav__open{
     background-color: #007bff;
     border: 0;
-    left: 20px;
+    left: 60px;
     top: 0px;
     color: white;
+    font-size: 3rem;
     
 }
 .sideNav__open:focus{
@@ -101,14 +104,14 @@ header{
     background-color: #007bff;
     overflow-x: hidden;
     transition: 0.5s;
-    padding-top: 60px;
+    padding-top: 180px;
     
   }
   
   .sidenav a {
-    padding: 8px 8px 8px 32px;
+    padding: 24px 24px 24px 96px;
     text-decoration: none;
-    font-size: 25px;
+    font-size: 75px;
     color: #ffffff;
     display: block;
     transition: 0.3s;
@@ -122,9 +125,9 @@ header{
   .sidenav .closebtn {
     position: absolute;
     top: 0;
-    right: 25px;
-    font-size: 36px;
-    margin-left: 50px;
+    right: 75px;
+    font-size: 108px;
+    margin-left: 150px;
   }
 
   .startQuiz__button, .wrongStart__button{
@@ -136,7 +139,7 @@ header{
 
   .static__container{
       position: absolute;
-      margin: 50px;
+      margin: 150px;
       
   }
 
@@ -148,14 +151,14 @@ header{
      font-size: 2rem;
   }
   .aboutText{
-      margin: 50px;
+      margin: 150px;
   }
 
   .quiz__button{
     position: absolute;
     left: 50%;
     transform: translateX(-50%);
-    margin: 30px 30px 100px 0px;
+    margin: 90px 90px 300px 0px;
       
   }
 
@@ -166,8 +169,8 @@ header{
   .mds-radio {
     
     position: relative;
-    padding-left: 30px;
-    width: 20px;
+    padding-left: 90px;
+    width: 60px;
     cursor: pointer;
     
 }
@@ -176,17 +179,17 @@ header{
     position: absolute;
     top: 0;
     left: 0;
-    height: 24px;
-    width: 24px;
-    border: 2px solid;
+    height: 72px;
+    width: 72px;
+    border: 6px solid;
     border-color: #00000089;
     border-radius: 50%;
 }
 
 .mds-radio__input {
     position: absolute;
-    top: 3px;
-    left: 5px;
+    top: 9px;
+    left: 15px;
     opacity: 0;
     cursor: pointer;
 }
@@ -195,8 +198,8 @@ header{
 .mds-radio__input:checked ~ .mds-radio__span {
     background-color: #007bff;
     border-color: #007bff;
-    height: 24px;
-    width: 24px;
+    height: 72px;
+    width: 72px;
     transition-duration: .4s;
 }
 
@@ -204,11 +207,11 @@ header{
 
 .mds-radio .mds-radio__input:checked ~ .mds-radio__innerSpan {
     position: absolute;
-    top: 4px;
-    left: 4px;
-    width: 16px;
-    height: 16px;
-    border: 3px solid white;
+    top: 12px;
+    left: 13px;
+    width: 46px;
+    height: 46px;
+    border: 9px solid white;
     border-radius: 50%;
 
 }
