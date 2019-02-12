@@ -8,7 +8,6 @@
 header{
     position: sticky;
     top: 0px;
-    left: -30px;
     background-color: #007bff;
     width: 100%;
     height: 300px;
@@ -104,8 +103,7 @@ h3{
 .sideNav__open{
     background-color: #007bff;
     border: 0;
-    left: 0px;
-    top: 0px;
+    
     color: white;
     font-size: 126px;
     cursor:pointer;
