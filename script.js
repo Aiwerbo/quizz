@@ -199,7 +199,7 @@ function checkIfCorrect(){
 
 document.querySelector('.sideNav__open').addEventListener('click', function(){
     let openNavigation = document.querySelector('#sidenavigation');
-    openNavigation.style.width = '700px'
+    openNavigation.style.width = '190px'
     let h3toMove = document.querySelector('.header__text');
     h3toMove.classList.add('header__text--moveRight');
     h3toMove.classList.remove('header__text--moveLeft');
