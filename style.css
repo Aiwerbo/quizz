@@ -3,9 +3,10 @@
 .main__container{
     position: absolute;
     
-    width: 100%;
+    width: 101%;
     height: 100%;
-    
+    clear: both;
+    overflow: auto;
     
 }
 header{
