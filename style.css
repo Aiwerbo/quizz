@@ -95,6 +95,9 @@ h3{
     margin-left: 20px;
     margin-right: 20px;
 }
+.quiz__container--correct{
+    color: green;
+ }
 
 .sideNav__open{
     background-color: #007bff;
@@ -179,13 +182,14 @@ h3{
       margin: 50px;
   }
 
-  .quiz__button{
+  .quiz__button, .quiz__button2{
     position: absolute;
     left: 50%;
     transform: translateX(-50%);
     margin: 30px 30px 100px 0px;
       
   }
+
 
   .close > span{
     font-size: 24px;    
@@ -248,5 +252,14 @@ h3{
 
 .mds-radio__input:focus + .mds-radio__span {
     border: 2px solid #007bff;
+   
+}
+
+.mds-radio__input:checked ~ .mds-radio__span--disabled {
+    background-color: rgb(169, 169, 169);
+    border-color: rgb(169, 169, 169);
     
+}
+.mds-radio__span--disabled{
+    border-color: rgb(169, 169, 169);
 }

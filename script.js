@@ -5,6 +5,7 @@ let correctAmount = 0;
 let incorrectAmount = 0;
 let questionsAmount = 0;
 let checkedInputs = [];
+let correctArray = [];
 let aboutText = 'Welcome to Quizzz. This is the quizzziest quiz in the quiz world.'
 
 let quizData = {
@@ -43,10 +44,10 @@ let quizData = {
     }
     
 }
-// --------------- Controller --------------------
+
 
 function fetchQuizData(){
-
+    
     quizData.questions = [];
     quizData.correctAnswers = [];
 
@@ -78,7 +79,10 @@ fetch('https://opentdb.com/api.php?amount=10&type=boolean')
 }
 
 function checkIfCorrect(){
+    let correctArrayTextWrong = ['<br>Q1 - Wrong<br>', 'Q2 - Wrong<br>', 'Q3 - Wrong<br>', 'Q4 - Wrong<br>', 'Q5 - Wrong<br>', 'Q6 - Wrong<br>', 'Q7- Wrong<br>', 'Q8 - Wrong<br>', 'Q9 - Wrong<br>', 'Q10 - Wrong<br>'];
     
+    let correctArrayTextRight = ['<br>Q1 - Right<br>', 'Q2 - Right<br>', 'Q3 - Right<br>', 'Q4 - Right<br>', 'Q5 - Right<br>', 'Q6 - Right<br>', 'Q7- Right<br>', 'Q8 - Right<br>', 'Q9 - Right<br>', 'Q10 - Right<br>'];
+    correctArray = [];
     checkedInputs = [];
     
     let form = document.querySelector('form');
@@ -99,8 +103,23 @@ function checkIfCorrect(){
             checkedInputs.push(checkAllInputs[i].value);
             
     }
-       
+   
     };
+    /* let changeToGreen = document.querySelectorAll('.mds-radio__span');
+
+        for(let i = 0; i < changeToGreen.length; i++){
+            if(quizData.correctAnswers[i] === checkedInputs[i]){
+        
+                changeToGreen[i].classList.add('mds-radio__span--correct')
+        
+            }
+        
+         } */
+
+   
+
+
+
     console.log(checkedInputs)
     console.log(quizData.correctAnswers);
     console.log(checkedInputs.length)
@@ -175,12 +194,58 @@ function checkIfCorrect(){
             return;
         } 
 
+        
+
+        let removeCorrectButton = document.querySelector('.quiz__button');
+        let formParent = document.querySelector('form');
+        formParent.removeChild(removeCorrectButton);
+        let newStartButton = document.createElement('button');
+        newStartButton.classList.add('btn');
+        newStartButton.classList.add('btn-primary');
+        newStartButton.classList.add('btn-block');
+        newStartButton.classList.add('quiz__button2');
+        newStartButton.textContent = 'Start new quiz';
+        let main = document.querySelector('main');
+        main.appendChild(newStartButton)
+        newStartButton.addEventListener('click', () => {
+            fetchQuizData();
+        })
+        
+        
+       
+        
+        let quizC = document.querySelectorAll('.quiz__container > p');
+        let quizRadioInput = document.querySelectorAll('.quiz__radio__input');
+        let greyMds = document.querySelectorAll('.mds-radio');
+        let greySpan = document.querySelectorAll('.mds-radio__span');
+        let greyInnerSpan = document.querySelectorAll('.mds-radio__innerSpan')
+        for(let i = 0; i < quizRadioInput.length; i++){
+            quizRadioInput[i].setAttribute('disabled', true);
+            greyMds[i].style.color = 'rgb(169, 169, 169)';
+            greyMds[i].style.borderColor = 'rgb(169, 169, 169)';
+            greySpan[i].classList.add('mds-radio__span--disabled')
+            greyInnerSpan[i].classList.add('mds-radio__span--disabled')
+        }
+        console.log(quizC)
+        
+        
     for(let i = 0; i < checkedInputs.length; i++){
      
         if(checkedInputs[i] === quizData.correctAnswers[i]){
             correctAmount++;
+            correctArray.push(correctArrayTextRight[i]); 
+            /* changeToGreen[i].classList.add('mds-radio__span--correct') */
+            quizC[i].style.color = '#23852b';
+            quizC[i].textContent = quizData.questionNumber[i] + '. ' + htmlDecode(quizData.questions[i]) + 'You answered ' + checkedInputs[i] + '. CORRECT.';
+                
+        }
+        else{
+            correctArray.push(correctArrayTextWrong[i]);
+            quizC[i].style.color = 'red';
+            quizC[i].textContent = quizData.questionNumber[i] + '. ' + htmlDecode(quizData.questions[i]) + ' You answered ' + checkedInputs[i] + '. INCORRECT.';
         }
     }
+    console.log(correctArray)
     gamePlayedAmount++;
     incorrectAmount = 10 - correctAmount;
     correctPerAmount = ((correctAmount / 10) * 100) + '%';
@@ -346,7 +411,7 @@ function renderQuiz(){
         let quizP = document.createElement('p');
         quizP.classList.add('quiz__numbers__question');
         quizP.setAttribute('tabindex', '0');
-        quizP.textContent = quizNumbers + ' ' + htmlDecode(quizQuestions);
+        quizP.textContent = quizNumbers + '. ' + htmlDecode(quizQuestions);
         divContainer.appendChild(quizP)
         let br = document.createElement('br');
         let label1 = document.createElement('label');
@@ -467,9 +532,11 @@ function modalPopup(){
     span.setAttribute('aria-hidden', 'true');
     span.innerHTML = '&times;'; 
     selButton.appendChild(span);
+    let modalbr = document.createElement('br');
     let modalBody = document.createElement('div');
     modalBody.classList.add('modal-body');
-    modalBody.textContent = 'You have got ' + correctAmount + ' correct answers';
+    modalBody.innerHTML = 'You have got ' + correctAmount + ' correct answers:<br>'
+    console.log(correctArray)
     modalContent.appendChild(modalBody);
     let modalFooter = document.createElement('div');
     modalFooter.classList.add('modal-footer');
@@ -491,7 +558,7 @@ function modalPopup(){
     btnSecondary.classList.add('btn-secondary');
     btnSecondary.setAttribute('data-dismiss', 'modal');
     btnSecondary.classList.add('popup__btn')
-    btnSecondary.textContent = 'Close';
+    btnSecondary.textContent = 'Close to se correct answers';
     selModalFooter.appendChild(btnSecondary);
 
     btnPrimary.addEventListener('click', function(){
@@ -545,7 +612,7 @@ function renderAbout(){
 }
 
 function renderFirstPage(){
-
+    
     renderButton();
     
 }
