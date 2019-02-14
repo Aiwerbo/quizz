@@ -15,7 +15,7 @@
     <link rel="stylesheet" type="text/css" href="style.css">
     <title>UX Labb2</title>
   </head>
-  <body>
+  <body id="top">
     
   <div class="main__container">
     <header>
@@ -31,7 +31,7 @@
     <div id="sidenavigation" class="sidenav">
         
         <a href="javascript:void(0)" aria-label="close" class="closebtn">&times;</a>
-        <a id="playQuiz" href="#quiz" onclick="renderQuizMenu()">Play Quizzz</a>
+        <a id="playQuiz" href="#quiz" onclick="renderQuizMenu(), scrollToTop()">Play Quizzz</a>
         <a id="static" href="#static" onclick="renderStats()">static</a>
         <a id="about" href="#about" onclick="renderAbout()">About</a>
       </div>

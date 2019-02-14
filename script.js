@@ -374,6 +374,8 @@ function htmlDecode(input){
 }
 
 function renderQuiz(){
+    
+    
     let h3Header = document.createElement('h3');
     console.log(h3Header)
    document.querySelector('main').innerHTML = '';
@@ -395,7 +397,7 @@ function renderQuiz(){
    let form = document.createElement('form');
    let main = document.querySelector('main');
    main.appendChild(form) 
-    
+   
     for(let i = 0; i < quizData.questionNumberU.length; i++){
         let quizNumbers = quizData.questionNumber[i];
         let quizNumbersU = quizData.questionNumberU[i];
@@ -498,6 +500,7 @@ function renderQuiz(){
 }
 
 function renderQuizMenu(){
+    
     renderQuiz();
     let h3Header = document.querySelector('.header__text')
     h3Header.classList.add('header__text--moveLeft');
