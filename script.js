@@ -236,7 +236,7 @@ function checkIfCorrect(){
             correctArray.push(correctArrayTextRight[i]); 
             /* changeToGreen[i].classList.add('mds-radio__span--correct') */
             quizC[i].style.color = '#23852b';
-            quizC[i].textContent = quizData.questionNumber[i] + '. ' + htmlDecode(quizData.questions[i]) + 'You answered ' + checkedInputs[i] + '. CORRECT.';
+            quizC[i].textContent = quizData.questionNumber[i] + '. ' + htmlDecode(quizData.questions[i]) + ' You answered ' + checkedInputs[i] + '. CORRECT.';
                 
         }
         else{
