@@ -59,11 +59,18 @@ fetch('https://opentdb.com/api.php?amount=10&type=boolean')
         return response.json();
         
     }
+    
+   
+    
+  })
+  .catch(function(error){
+
     wrongStartButton();
     
     throw new Error('Somethong in the network went wrong.');
-    
+
   })
+
   .then(function(data) {
         
     let object;
@@ -553,7 +560,7 @@ function modalPopup(){
     btnPrimary.setAttribute('data-dismiss', 'modal');
     btnPrimary.classList.add('popup__btn')
     btnPrimary.classList.add('btn-block')
-    btnPrimary.textContent = 'Start new Quizzz';
+    btnPrimary.textContent = 'New Quizzz';
     selModalFooter.appendChild(btnPrimary);
     let btnSecondary = document.createElement('button');
     btnSecondary.setAttribute('type', 'button');
@@ -561,7 +568,7 @@ function modalPopup(){
     btnSecondary.classList.add('btn-secondary');
     btnSecondary.setAttribute('data-dismiss', 'modal');
     btnSecondary.classList.add('popup__btn')
-    btnSecondary.textContent = 'Close, se correct answers';
+    btnSecondary.textContent = 'Close. Se answers';
     selModalFooter.appendChild(btnSecondary);
 
     btnPrimary.addEventListener('click', function(){
