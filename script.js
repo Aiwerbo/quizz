@@ -44,9 +44,23 @@ let quizData = {
     }
     
 }
+function test(){
+    let closeNavigation = document.querySelector('#sidenavigation');
+    closeNavigation.style.width = '0px';
+    let h3Header = document.createElement('h3');
+    h3Header.textContent = 'Welcome';
+    h3Header.classList.add('header__text')
+    h3Header.classList.add('header__text--moveLeft');
+    h3Header.classList.remove('header__text--moveRight');
+    let selheaderChange = document.querySelector('.header__change');
+    selheaderChange.innerHTML = '';
+    selheaderChange.appendChild(h3Header); 
+}
 
 
 function fetchQuizData(){
+    
+
     
     quizData.questions = [];
     quizData.correctAnswers = [];
@@ -291,6 +305,13 @@ document.querySelector('.closebtn').addEventListener('click', function(){
 // Render first button
 function renderButton(){
 
+    let closeNavigation = document.querySelector('#sidenavigation');
+    closeNavigation.style.width = '0px';
+   let h3Header = document.createElement('h3');
+    h3Header.textContent = 'Welcome';
+    h3Header.classList.add('header__text')
+    h3Header.classList.add('header__text--moveLeft');
+    
     document.querySelector('main').innerHTML = '';
     /*  */
     let startButton = document.createElement('button');
@@ -307,6 +328,7 @@ function renderButton(){
     let h3Header = document.createElement('h3');
     h3Header.textContent = 'Welcome';
     h3Header.classList.add('header__text');
+    
     let selheaderChange = document.querySelector('.header__change');
     selheaderChange.appendChild(h3Header); 
     document.querySelector('.startQuiz__button').addEventListener('click', function(e){
@@ -316,6 +338,7 @@ function renderButton(){
     })
     
 }
+
 
 // starts with Onclick in html.
 function renderStats(){
