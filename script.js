@@ -561,7 +561,7 @@ function modalPopup(){
     btnSecondary.classList.add('btn-secondary');
     btnSecondary.setAttribute('data-dismiss', 'modal');
     btnSecondary.classList.add('popup__btn')
-    btnSecondary.textContent = 'Close to se correct answers';
+    btnSecondary.textContent = 'Close, se correct answers';
     selModalFooter.appendChild(btnSecondary);
 
     btnPrimary.addEventListener('click', function(){
