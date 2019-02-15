@@ -316,7 +316,7 @@ function renderButton(){
     /*  */
     let startButton = document.createElement('button');
     startButton.classList.add('btn');
-    startButton.classList.add('btn-outline-primary');
+    startButton.classList.add('btn-primary');
     startButton.classList.add('btn-lg');
     startButton.classList.add('btn-block')
     startButton.classList.add('startQuiz__button');
@@ -655,7 +655,7 @@ function wrongStartButton(){
     let button = document.createElement('button');
     button.type = 'button';
     button.classList.add('btn');
-    button.classList.add('btn-outline-danger');
+    button.classList.add('btn-danger');
     button.classList.add('btn-lg');
     button.classList.add('wrongStart__button');
     button.classList.add('btn-block');
